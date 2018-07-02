@@ -10,6 +10,7 @@ end
 gem 'rails', '~> 5.1.6'
 gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails'
+gem 'simple_form', '~> 3.5'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
