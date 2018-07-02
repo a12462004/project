@@ -1,9 +1,9 @@
 require 'json'
 require 'net/http'
 namespace :db do
-	namespace :weather do
-	desc "update weather info from city"
-	task :update do
+	namespace :meteorological do
+	desc "update meteorological info from city"
+	task :update => :environment do
 		# step1 抓到網址資料
         resp = Net::HTTP.get_response(URI.parse('http://opendata.cwb.gov.tw/govdownload?dataid=F-C0032-005&authorizationkey=rdec-key-123-45678-011121314')).body
         # step2 將抓到的XML資料轉換成hash
@@ -12,36 +12,22 @@ namespace :db do
         result["cwbopendata"]["dataset"]["location"].each do |data|
         	data["weatherElement"].each do |element|
         		element["time"].each do |time|
-	        		if element["elementName"] == "Wx"
-        				weather_WX ={
-	        			locationName: data["locationName"],
+        			if element["elementName"] == "Wx"
+        				value = time["parameter"]["parameterValue"]
+        			else
+        				value = time["parameter"]["parameterUnit"]
+        			end
+        			weather_data = {
+        				location_name: data["locationName"],
 	        			element: element["elementName"],
 	        			time: time["startTime"],
 	        			parameter: time["parameter"]["parameterName"],
-	        			parameter_value: time["parameter"]["parameterValue"]
-	        			}
-	        			puts weather_WX
-        			
-        			elsif element["elementName"] == "MinT"
-        				weather_MinT = {
-        					locationName: data["locationName"],
-		        			element: element["elementName"],
-		        			time: time["startTime"],
-		        			parameter: time["parameter"]["parameterName"],
-		        			parameter_unit: time["parameter"]["parameterUnit"]
-	        			}
-	        			puts weather_MinT
-
-        			else
-        				weather_MaxT = {
-        					locationName: data["locationName"],
-		        			element: element["elementName"],
-		        			time: time["startTime"],
-		        			parameter: time["parameter"]["parameterName"],
-		        			parameter_unit: time["parameter"]["parameterUnit"]
-	        			}
-	        			puts weather_MaxT
-        			end
+	        			parameter_value: value
+        			}
+        			weather = Weather.find_or_initialize_by(time: time["startTime"])
+        			weather.update(weather_data)
+        			weather.save
+        			# puts weather_data
         		end  		
         	end
         end
