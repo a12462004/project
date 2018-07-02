@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180702084019) do
+ActiveRecord::Schema.define(version: 20180702100802) do
+
+  create_table "states", force: :cascade do |t|
+    t.integer "num"
+    t.string "img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "weathers", force: :cascade do |t|
     t.string "location_name"
