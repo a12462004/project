@@ -1,29 +1,29 @@
-<p id="notice"><%= notice %></p>
-
-<h1>States</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Img</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @states.each do |state| %>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h1>天氣狀態代碼表</h1>
+  <p><%= link_to '新增', new_state_path, :class=>"btn btn-danger" %></p>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= state.id %></td>
-        <td><%= state.img %></td>
-        <td><%= link_to 'Show', state %></td>
-        <td><%= link_to 'Edit', edit_state_path(state) %></td>
-        <td><%= link_to 'Destroy', state, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th scope="col">代碼</th>
+        <th scope="col">圖片名稱</th>
+        <th scope="col">功能</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @states.each do |state| %>
+        <tr>
+          <td><%= state.id %></td>
+          <td><%= state.img %></td>
+          <td>
+            <%= link_to '詳情', state, :class=>"btn btn-info" %>
+            <%= link_to '修改', edit_state_path(state), :class=>"btn btn-success" %>
+            <%= link_to '刪除', state, :class=>"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New State', new_state_path %>
+</div>

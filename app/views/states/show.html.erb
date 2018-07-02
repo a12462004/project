@@ -1,14 +1,16 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+	<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Id:</strong>
-  <%= @state.id %>
-</p>
+	<p>
+	  <h3>代碼：</h3>
+	  <h3><%= @state.id %></h3>
+	</p>
 
-<p>
-  <strong>Img:</strong>
-  <%= @state.img %>
-</p>
+	<p>
+	  <h3>圖片名稱：</h3>
+	  <h3><%= @state.img %></h3>
+	</p>
 
-<%= link_to 'Edit', edit_state_path(@state) %> |
-<%= link_to 'Back', states_path %>
+	<%= link_to '修改', edit_state_path(@state), :class=>"btn btn-success" %>
+	<%= link_to '返回', states_path, :class=>"btn btn-secondary" %>
+</div>
