@@ -18,7 +18,9 @@ class WeatherController < ApplicationController
   	# 只有當天
   	# t = Time.now.strftime("%Y-%m-%d")
   	# Weather.where("location_name = ? and date(time) = ?",location,t)
-  	location = "臺北市"
+  	location = params[:location]
+  	if location == nil then location = "臺北市" end
   	@weathers = Weather.where("location_name = ? and time IN (?) ",location,a)
+  	@citys = Weather.group("location_name")
   end
 end

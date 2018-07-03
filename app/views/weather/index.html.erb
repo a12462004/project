@@ -1,4 +1,15 @@
 <h3><%= @weathers[0].location_name %></h3>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    選擇鄉鎮市
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  	<% @citys.each do |city|%>
+    	<a class="dropdown-item" href="./weather?location=<%= city.location_name%>"><%= city.location_name%></a>
+    <% end %>
+    
+  </div>
+</div>
 <table class="table">
 	<thead>
       <tr>
