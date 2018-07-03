@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180702100802) do
+ActiveRecord::Schema.define(version: 20180703115154) do
 
   create_table "states", force: :cascade do |t|
     t.integer "num"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20180702100802) do
   create_table "weathers", force: :cascade do |t|
     t.string "location_name"
     t.string "element"
-    t.datetime "time"
+    t.string "time"
     t.string "parameter"
     t.string "parameter_value"
     t.datetime "created_at", null: false

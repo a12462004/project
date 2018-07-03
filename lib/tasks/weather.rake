@@ -1,5 +1,6 @@
 require 'json'
 require 'net/http'
+require 'time'
 namespace :db do
 	namespace :meteorological do
 	desc "update meteorological info from city"
@@ -12,6 +13,7 @@ namespace :db do
         result["cwbopendata"]["dataset"]["location"].each do |data|
         	data["weatherElement"].each do |element|
         		element["time"].each do |time|
+                    #判斷是不是天氣狀況，是的話parameter_value給parameterValue，不是的話給parameterUnit
         			if element["elementName"] == "Wx"
         				value = time["parameter"]["parameterValue"]
         			else
@@ -24,10 +26,11 @@ namespace :db do
 	        			parameter: time["parameter"]["parameterName"],
 	        			parameter_value: value
         			}
-        			weather = Weather.find_or_initialize_by(time: time["startTime"])
-        			weather.update(weather_data)
+                    #進行比對，若是已有的資料則不要新增，若是沒有的要新增到Weather資料表
+        			weather = Weather.find_or_initialize_by(location_name: data["locationName"], element: element["elementName"], time: time["startTime"])
+                    weather.update(weather_data)
         			weather.save
-        			# puts weather_data
+                    # puts weather_data
         		end  		
         	end
         end
