@@ -22,7 +22,7 @@ class WeatherController < ApplicationController
   	location = params[:location]
   	if location == nil then location = "臺北市" end
   	@weathers = Weather.where("location_name = ? and time IN (?) ",location,a)
-  	@citys = Weather.group("location_name")
+  	@citys = Weather.group("location_name").select("MIN(id) AS id ,location_name")
     @locationName = location
     @weathers_Wx = Weather.where("location_name = ? and element = 'Wx' and time IN (?) ",location,a)
     @weathers_MinT = Weather.where("location_name = ? and element = 'MinT' and time IN (?) ",location,a)
