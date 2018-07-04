@@ -14,3 +14,11 @@
  *= require_self
  */
 @import "bootstrap";
+@import "nav";
+@import "content";
+
+body{
+    font-family: "微軟正黑體";
+    overflow: hidden;
+}
+

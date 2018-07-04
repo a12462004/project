@@ -20,7 +20,12 @@ class WeatherController < ApplicationController
   	# Weather.where("location_name = ? and date(time) = ?",location,t)
   	location = params[:location]
   	if location == nil then location = "臺北市" end
-  	@weathers = Weather.where("location_name = ? and time IN (?) ",location,a)
+  	# @weathers = Weather.where("location_name = ? and time IN (?) ",location,a)
   	@citys = Weather.group("location_name")
+    @locationName = location
+    @weathers_Wx = Weather.where("location_name = ? and time IN (?) and element = 'Wx' ",location,a)
+    @weathers_MinT = Weather.where("location_name = ? and time IN (?) and element = 'MinT' ",location,a)
+    @weathers_Max = Weather.where("location_name = ? and time IN (?) and element = 'Max' ",location,a)
+
   end
 end
