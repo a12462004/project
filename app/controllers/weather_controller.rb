@@ -1,3 +1,4 @@
+# encoding: utf-8
 class WeatherController < ApplicationController
   def index
   	h = Time.now.strftime("%H").to_i #當前時間是幾點，轉換成INT
