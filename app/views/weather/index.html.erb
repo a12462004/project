@@ -1,32 +1,46 @@
-<h3><%= @weathers[0].location_name %></h3>
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    選擇鄉鎮市
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  	<% @citys.each do |city|%>
-    	<a class="dropdown-item" href="./weather?location=<%= city.location_name%>"><%= city.location_name%></a>
-    <% end %>
+ <%= render "nav" %>
+ <div class="content">
+    <!-- <img src="https://images.pexels.com/photos/103567/pexels-photo-103567.jpeg"> -->
+    <h1 class="display-2 text-light locationName"><%= @locationName %></h1>
+    <h1 class= "text-light today"><%= @today %></h1>
+
+    <h1 class="text-light temperature">
+      <img src= "./images/<%= @weathers_Wx[0].parameter_value %>.png" class="element_img">
+      <%= @weathers_MaxT[0].parameter %>  ℃ ～ <%= @weathers_MinT[0].parameter %>  ℃
+    </h1>
     
-  </div>
 </div>
-<table class="table">
-	<thead>
-      <tr>
-        <th scope="col">性質</th>
-        <th scope="col">日期</th>
-        <th scope="col">狀態</th>
-        <th scope="col">值</th>
-      </tr>
-    </thead>
-	<tbody>
-		<% @weathers.each do |weather| %>
-			<tr>
-	          <td><%= weather.element %></td>
-	          <td><%= weather.time %></td>
-	          <td><%= weather.parameter %></td>
-	          <td><%= weather.parameter_value %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+<div class="day bg-dark">
+  <div class="row text-center text-light">
+      <% @weathers_Wx.each_with_index do |wx , index|%>
+        <% if index != 0 %>
+          <div class="col element">
+            <h5><%= wx.time.to_time.strftime("%m/%d") %></h5>
+            <img src= "./images/<%= wx.parameter_value %>.png">
+            <p class="p-1"><%= wx.parameter %></p>
+          </div>
+        <% end %>
+      <% end%>
+  </div>
+  <div class="row text-center text-light">
+      <% @weathers_MaxT.each_with_index do |maxT , index|%>
+        <% if index != 0 %>
+          <div class="col ">
+            <span><%= maxT.parameter %> ℃</span>
+            <br />
+            <span>|</span>
+          </div>
+        <% end %>
+      <% end%>
+  </div>
+  <div class="row text-center text-light">
+      <% @weathers_MinT.each_with_index do |minT , index|%>
+        <% if index != 0 %>
+          <div class="col ">
+            <p><%= minT.parameter %> ℃</p>
+          </div>
+        <% end %>
+      <% end%>
+  </div>
+  
+</div>

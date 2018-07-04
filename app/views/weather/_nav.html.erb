@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="./">一週天氣預報</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          請選擇想知道的地區
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <% @citys.each do |city|%>
+            <a class="dropdown-item" href="./weather?location=<%= city.location_name%>"><%= city.location_name%></a>
+          <% end %>
+        </div>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      10536011 謝依庭,10536017 黃維柔 共同製作
+    </span>
+  </div>
+</nav>

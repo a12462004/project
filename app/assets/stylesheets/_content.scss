@@ -1,0 +1,39 @@
+.page{
+    height:100vh;
+}
+.content{
+    height: 60%;
+    padding-top: 150px;
+    text-align:center;
+    background: url('https://images.pexels.com/photos/103567/pexels-photo-103567.jpeg') no-repeat center / cover;
+
+   .locationName{
+        display:block;
+        vertical-align:middle;
+        text-shadow: 2px 2px 4px #000000;
+    }
+    .temperature{
+        display:inline-block;
+        vertical-align:left;
+        text-shadow: 2px 2px 4px #000000;
+    }
+    .today{
+        text-shadow: 2px 2px 4px #000000;
+    }
+    .element_img{
+        height: 55px;
+        width: 55px;
+    }
+}
+.day{
+    height: 35%;
+    background: linear-gradient(to right, #0c2346 0%, #337894 37%, #38214f 100%);
+}
+.element{
+    padding-top: 15px;
+    img{
+        padding-top: 5px;
+        width:80px;
+        height:80px;
+    }
+}
