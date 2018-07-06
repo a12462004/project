@@ -5,6 +5,7 @@ namespace :db do
 	namespace :meteorological do
 	desc "update meteorological info from city"
 	task :update => :environment do
+        Weather.delete_all
 		# step1 抓到網址資料
         resp = Net::HTTP.get_response(URI.parse('http://opendata.cwb.gov.tw/govdownload?dataid=F-C0032-005&authorizationkey=rdec-key-123-45678-011121314')).body
         # step2 將抓到的XML資料轉換成hash
